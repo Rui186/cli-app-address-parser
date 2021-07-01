@@ -14,17 +14,17 @@ module ClientInfoFileService
 
       if @input.size > 1
         STDERR.puts 'Only accept 1 input file'
-        return
+        return false
       end
 
       if !validate_input_file(@input.first).nil?
         STDERR.puts validate_input_file(@input.first)
-        return
+        return false
       end
             
       if !validate_input_file_header(@input.first).nil?
         STDERR.puts validate_input_file_header(@input.first)
-        return
+        return false
       end
 
       true
@@ -32,9 +32,7 @@ module ClientInfoFileService
 
     def parse
       while gets
-        gets = "colton_tromp@gmail.com,Darcy,Waters,97 King William street,KENT TOWN,SA,5067,64 GLEN OSMOND road,PARKSIDE,SA,5063\r\n"
         parse_content(gets)
-        break
       end
     end
 
@@ -42,14 +40,14 @@ module ClientInfoFileService
 
     def validate_input_file(file)
       return "Cannot find file #{file}" unless File.file?(file)
-      return 'Please provide a CSV file.' unless File.extname(file) == '.csv'
+      return 'Please provide a CSV file' unless File.extname(file) == '.csv'
     end
 
     def validate_input_file_header(file)
       file = File.read(file)
       table = CSV.parse(file)
       return if table.first == HEADER
-      "Header should same as #{HEADER}."
+      "Header should same as #{HEADER}"
     end
     
     def parse_content(line)
