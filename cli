@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+require './lib/client_info_file_service/parser'
+require 'optparse'
+
+options = {}
+OptionParser.new do |parser|
+  parser.on("-v", "--version", "The version of the app") do |value|
+    puts '0.1.0'
+  end
+end.parse!
+
+# while gets
+#   puts gets 
+# end
