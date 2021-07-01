@@ -1,5 +1,5 @@
 require "bundler/setup"
-require "cli_app"
+require "client_info_file_service"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
